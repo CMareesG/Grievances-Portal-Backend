@@ -8,7 +8,6 @@ import com.marees.grievences_portal.models.User;
 import com.marees.grievences_portal.repository.PasswordResetTokenRepository;
 import com.marees.grievences_portal.repository.RoleRepository;
 import com.marees.grievences_portal.repository.UserRepository;
-import com.marees.grievences_portal.utils.EmailService;
 import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,9 +37,7 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     PasswordResetTokenRepository passwordResetTokenRepository;
-
-    @Autowired
-    EmailService emailService;
+    
 
     @Autowired
     TotpService totpService;
@@ -164,7 +161,6 @@ public class UserServiceImpl implements UserService{
 
         String resetUrl = frontendUrl + "/reset-password?token=" + token;
         // Send email to user
-        emailService.sendPasswordResetEmail(user.getEmail(), resetUrl);
     }
 
     @Override
