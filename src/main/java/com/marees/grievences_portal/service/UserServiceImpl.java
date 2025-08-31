@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     PasswordResetTokenRepository passwordResetTokenRepository;
-    
+
 
     @Autowired
     TotpService totpService;

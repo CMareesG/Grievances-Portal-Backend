@@ -6,13 +6,10 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 public class Grievance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +33,13 @@ public class Grievance {
     private int upvoteCount = 0;
 
     @ElementCollection
+    @CollectionTable(
+            name = "grievance_users_who_upvoted",
+            joinColumns = @JoinColumn(name = "grievance_id")
+    )
+    @Column(name = "user_email", nullable = false)
     private Set<String> usersWhoUpvoted = new HashSet<>();
 
-    @Column(name = "concerned_staff_email") // Ensure the column name is consistent with the database
+    @Column(name = "concerned_staff_email")
     private String concernedStaffEmail;
 }
